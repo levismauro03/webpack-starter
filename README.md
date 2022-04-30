@@ -14,4 +14,4 @@ Recuerda que deberas ejecutar el comando de:
 Y para construir el build, recuerda ejecutar el comando de:
 
 npm run build
-git add 
+ 
