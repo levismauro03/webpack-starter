@@ -1,10 +1,11 @@
-const HtmlWebpack    = require('html-webpack-plugin')
-const MiniCssExtract = require('mini-css-extract-plugin');
+
+const HtmlWebPack    = require('html-webpack-plugin');
+const MiniCssExtract = require("mini-css-extract-plugin");
 const CopyPlugin     = require("copy-webpack-plugin");
 
+
 module.exports = {
-    
-    mode: "development",
+    mode: 'development',
 
     output: {
         clean: true
@@ -22,11 +23,11 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: /styles.css$/,
-                use: [ 'style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /styles.css$/,
-                use: [ MiniCssExtract.loader, 'css-loader' ]
+                use: [MiniCssExtract.loader, 'css-loader']
             },
             {
                 test: /\.(png|jpe?g|gif)$/,
@@ -38,12 +39,12 @@ module.exports = {
     optimization: {},
 
     plugins: [
-        new HtmlWebpack({
+        new HtmlWebPack({
             title: 'Mi Webpack App',
-            // filename: 'index.html',
+            filename: 'index.html',
             template: './src/index.html'
         }),
-        
+
         new MiniCssExtract({
             filename: '[name].css',
             ignoreOrder: false
@@ -51,10 +52,8 @@ module.exports = {
 
         new CopyPlugin({
             patterns: [
-                { from: 'src/assets/', to: 'assets/' }
+                {from: 'src/assets/', to: 'assets/'}
             ]
         })
-    ]
+    ],
 }
-
-

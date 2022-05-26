@@ -1,20 +1,18 @@
-const HtmlWebpack    = require('html-webpack-plugin')
-const MiniCssExtract = require('mini-css-extract-plugin');
+
+const HtmlWebPack    = require('html-webpack-plugin');
+const MiniCssExtract = require("mini-css-extract-plugin");
 const CopyPlugin     = require("copy-webpack-plugin");
 
-
-const CssMinimizer = require('css-minimizer-webpack-plugin');
-const Terser       = require('terser-webpack-plugin');
+const CssMinimizer   = require('css-minimizer-webpack-plugin');
+const Terseer        = require('terser-webpack-plugin');
 
 module.exports = {
-    
-    mode: "production",
+    mode: 'production',
 
     output: {
         clean: true,
-        filename: 'main.[contenthash].js'
+        filename: 'main.[fullhash].js'
     },
-    
 
     module: {
         rules: [
@@ -28,11 +26,11 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: /styles.css$/,
-                use: [ 'style-loader', 'css-loader']
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /styles.css$/,
-                use: [ MiniCssExtract.loader, 'css-loader' ]
+                use: [MiniCssExtract.loader, 'css-loader']
             },
             {
                 test: /\.(png|jpe?g|gif)$/,
@@ -42,10 +40,10 @@ module.exports = {
                 test: /\.m?js$/,
                 exclude: /node_modules/,
                 use: {
-                  loader: "babel-loader",
-                  options: {
-                    presets: ['@babel/preset-env']
-                  }
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
                 }
             }
         ]
@@ -55,28 +53,26 @@ module.exports = {
         minimize: true,
         minimizer: [
             new CssMinimizer(),
-            new Terser(),
+            new Terseer(),
         ]
     },
 
     plugins: [
-        new HtmlWebpack({
+        new HtmlWebPack({
             title: 'Mi Webpack App',
-            // filename: 'index.html',
+            filename: 'index.html',
             template: './src/index.html'
         }),
-        
+
         new MiniCssExtract({
-            filename: '[name].[fullhash].css',
+            filename: '[name][fullhash].css',
             ignoreOrder: false
         }),
 
         new CopyPlugin({
             patterns: [
-                { from: 'src/assets/', to: 'assets/' }
+                {from: 'src/assets/', to: 'assets/'}
             ]
         })
-    ]
+    ],
 }
-
-
